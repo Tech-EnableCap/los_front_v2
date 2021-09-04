@@ -1,0 +1,354 @@
+.jumbotron { 
+  padding: 20px;
+  background-color: #111;
+  position: fixed;
+  top: 5rem;
+  z-index: 5;
+  width: 100%;
+}
+
+.jumbotron h5 { 
+  text-align: center;
+  color: #DDD;
+  font-family: 'Raleway', Helvetica, Arial, sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+}
+
+
+.flex-item-left {
+  flex: 10%;
+
+}
+
+.flex-item-right {
+  flex: 90%;
+}
+
+.flex-item-left_details {
+  flex: 10%;
+
+}
+
+.flex-item-right_details {
+  flex: 90%;
+}
+
+
+@media (max-width: 800px) {
+  .flex-container {
+    flex-direction: column;
+  }
+}
+
+.status {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  /*justify-content: center;*/
+  align-items: center;
+}
+
+.side {
+  margin: 3%;
+  display: flex;
+  padding: 1%;
+  justify-content: center;
+}
+
+
+.arrow {
+  transform: rotateZ(0deg);
+  display: inline-block;
+  transition: transform 0.5s;
+}
+
+.sidebar:hover .arrow {
+  transform: rotateZ(180deg);
+}
+
+.sidebar:hover {
+  width: 15rem;
+}
+
+.sidebar:hover .sdmnu .menuItems {
+  width: 24rem;
+  text-align: left;
+}
+
+.sidebar:hover .sdLabel {
+  display: inline-block;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.sidebar:hover .sdHeader {
+  width: 100px;
+}
+
+.sdHeader {
+  /*background-color: rgb(212, 47, 111);*/
+  font-size: 1.8rem;
+  font-weight: 500;
+  min-height: 40px;
+  padding-top: 5px;
+  padding-right: 30px;
+  padding-left: 15px;
+  text-align: center;
+  width: fit-content;
+  margin-bottom: 20px;
+}
+
+.sidebar .fa {
+  font-size: 1.5rem;
+  display: inline-block;
+}
+
+.sdLabel {
+  display: none;
+}
+
+.sidebar .sdmnu {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding-right: 30px;
+}
+.sidebar .sdmnu .menuItems {
+  /*background-color: rgb(80, 6, 52);*/
+  font-size: 15px;
+  /*border-left: 1px solid rgb(255, 38, 147);*/
+  border-radius: 3px;
+  min-height: 40px;
+  width:50px;
+  padding: 0px 10px 0px 10px;
+  vertical-align: middle;
+  text-align: center;
+  user-select: none;
+  margin-bottom: 0.5vh;
+  transition: background-color 0.3s;
+
+}
+
+.justify-start {
+  margin-right: auto;
+}
+
+.sidebar .sdmnu .menuItems:hover {
+    background-color: #a6a9ae;
+    opacity: 0.9;
+    cursor: pointer;
+}
+
+
+.sidebar {
+  height: 100%;
+  width: 80px;
+  position: fixed;
+  top: 7rem;
+  /* z-index: 5; */
+  left: 0;
+  background: linear-gradient(rgb(255 252 252),#888888);
+  overflow-x: hidden;
+  padding-top: 70px;
+  z-index: 2;
+}
+
+
+.main {
+  padding: 0px 20px;
+  margin-top: 11rem;
+}
+
+.cardy{
+  /* Add shadows to create the "card" effect */
+  background: linear-gradient(rgb(255 252 252),#a9a9a9);
+  box-shadow: 0 4px 12px 6px rgb(0 0 0 / 20%);
+  transition: 0.3s;
+  margin-bottom: 2rem;
+}
+
+.details {
+  background: linear-gradient(rgb(255 252 252),#a9a9a9);
+  box-shadow: 0 4px 12px 6px rgb(0 0 0 / 20%);
+  transition: 0.3s;
+  margin-bottom: 2rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+/* On mouse-over, add a deeper shadow */
+.cardy:hover {
+  box-shadow: inset 0px 0px 8px 0px rgb(0 0 0 / 20%);
+}
+
+.details:hover {
+  box-shadow: inset 0px 0px 8px 0px rgb(0 0 0 / 20%);
+}
+
+/* Add some padding inside the card container */
+.container {
+  padding: 2px 16px;
+}
+
+
+.numberCircle {
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    padding: 8px;
+
+    background: #a6a9ae;
+    border: 2px solid #666;
+    color: #666;
+    text-align: center;
+
+    font: 20px;
+}
+
+
+.no-applications {
+    display: -webkit-flex;
+    display: flex;
+    height: 100%;
+    margin: 13rem auto;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+}
+
+.help-text {
+    padding-top: 16px;
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.logo {
+  height: 58vmin;
+  pointer-events: none;
+}
+
+.logo1 {
+  height: 43vmin;
+  pointer-events: visibleStroke;
+}
+
+.gobtn {
+  margin-top: 1.5rem;
+  height: 2rem;
+  margin-right: 0rem;
+}
+
+.refreshbtn {
+  margin-top: 1.5rem;
+  height: 2rem;
+  margin-right: 1rem;
+  margin-left: 0rem;
+}
+
+.searchbtn {
+  margin-top: 1.5rem;
+  height: 2rem;
+  cursor: pointer;
+}
+
+@media screen and (max-height: 450px) {
+  .sidebar {padding-top: 15px;}
+  .sidebar a {font-size: 18px;}
+}
+
+@media screen and (max-width: 800px) {
+  .sidebar {width: 60px;}
+  .main { margin-left: 58px;padding: 0px 10px;margin-top: 12rem;}
+  .details {margin-left: 0rem;margin-right: 0rem;overflow: overlay;}
+  .flex-item-right_details {overflow: scroll;}
+  .flex-item-left_details {overflow: scroll;}
+  .help-text {margin-left: 2rem;}
+  .refreshbtn {margin-left: 0rem;}
+  .gobtn {margin-top: 0rem;}
+}
+
+@keyframes flickerAnimation {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-o-keyframes flickerAnimation {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-moz-keyframes flickerAnimation {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes flickerAnimation {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.animate-flicker {
+  -webkit-animation: flickerAnimation 2s infinite;
+  -moz-animation: flickerAnimation 2s infinite;
+  -o-animation: flickerAnimation 2s infinite;
+  animation: flickerAnimation 2s infinite;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+tr.border_bottom td {
+  border: 1px solid black;
+}
+
+

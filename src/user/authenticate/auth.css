@@ -1,0 +1,32 @@
+.authentication__header {
+  color: white;
+  text-align: center;
+}
+
+.authentication {
+  width: 90%;
+  max-width: 27rem;
+  margin: 5rem auto;
+  text-align: center;
+  margin-bottom: 10rem;
+}
+
+.authentication form {
+  margin-bottom: 1rem;
+}
+
+.forgot_pass {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  display: inline-block;
+  background:transparent;
+  padding: 0.4em 0.4em;
+  border: 1px solid;
+  border-radius: 10px;
+  max-width: 20rem;
+}
+
+.forgot_pass:hover {
+	background:#433e40;
+	color:white;
+}
