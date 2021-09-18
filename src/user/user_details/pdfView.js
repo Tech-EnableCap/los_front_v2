@@ -49,7 +49,7 @@ export default function Test(props) {
  
   
   return (
-    <div>{picker ? <ImagePicker center id={props.id} ft="pdf/image" onInput={props.inputhandler}/> : (<><Document file={url} onLoadSuccess={onDocumentLoadSuccess}>
+    <div>{picker ? <ImagePicker center id={props.id} ft="pdf/image" onInput={props.inputhandler}/> : (<><Document file={{url:url,}} onLoadSuccess={onDocumentLoadSuccess}>
           <Page pageNumber={pageNumber} />
         </Document>
         <div>

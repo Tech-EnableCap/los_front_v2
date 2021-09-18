@@ -488,7 +488,7 @@ const Authenticate=()=>{
           		<Button type="button" onClick={comeOtpHandleMobile}>Verify Mobile</Button>
           	) : null}
 
-          	<Button type="submit" size={!isLoginMode && formState.isValid && formState.inputs.pass.value===formState.inputs.repass.value && "couple"} style={{marginTop:'1rem'}} disabled={isLoginMode ? !formState.isValid : !formState.isValid || !otpValid_email && !otpValid_mobile}>
+          	<Button type="submit" size={!isLoginMode && formState.isValid && formState.inputs.pass.value===formState.inputs.repass.value && "couple"} style={{marginTop:'1rem'}}>
             	{isLoginMode===true ? "LOG IN" : "SIGN UP"}
           	</Button>
 

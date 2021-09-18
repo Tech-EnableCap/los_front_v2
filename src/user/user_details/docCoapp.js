@@ -254,11 +254,11 @@ const Doc=(props)=>{
 						},
 						acc_num:{
 							value:res[0].id_c[0].coapp_ban_acc,
-							isValid:res[0].id_c[0].coapp_ban_acc==="" ? false : true
+							isValid:true
 						},
 						ifsc_num:{
 							value:res[0].id_c[0].coapp_ifsc,
-							isValid:res[0].id_c[0].coapp_ifsc==="" ? false : true
+							isValid:true
 						},
 					},true);
 				}
@@ -621,18 +621,18 @@ const Doc=(props)=>{
 			for (let i=25;i<=34;i++){
 				if(user["id_c"][0]["file"+i]){
 					if(user["id_c"][0]["file"+i].split(".").slice(-1)[0]==='pdf'){
-						ele1.push(<><div><PdfView id={`file${i}`} update inputhandler={inputHandler} url={`${route}${user["id_c"][0]["file"+i]}`}/></div><hr/></>)
+						ele1.push(<><div><PdfView id={`file${i}`} update inputhandler={inputHandler} url={`${user["id_c"][0]["file"+i]}`}/></div><hr/></>)
 					}else{
-						ele1.push(<><div><ImagePicker ft="pdf/image" formcontrol center id={`file${i}`} image={`${route}${user["id_c"][0]["file"+i]}`} onInput={inputHandler}/></div><hr/></>)
+						ele1.push(<><div><ImagePicker ft="pdf/image" formcontrol center id={`file${i}`} image={`${user["id_c"][0]["file"+i]}`} onInput={inputHandler}/></div><hr/></>)
 					}
 				}
 			}
 			for (let i=35;i<=44;i++){
 				if(user["id_c"][0]["file"+i]){
 					if(user["id_c"][0]["file"+i].split(".").slice(-1)[0]==='pdf'){
-						ele2.push(<><div><PdfView id={`file${i}`} update inputhandler={inputHandler} url={`${route}${user["id_c"][0]["file"+i]}`}/></div><hr/></>)
+						ele2.push(<><div><PdfView id={`file${i}`} update inputhandler={inputHandler} url={`${user["id_c"][0]["file"+i]}`}/></div><hr/></>)
 					}else{
-						ele2.push(<><div><ImagePicker ft="pdf/image" formcontrol center id={`file${i}`} image={`${route}${user["id_c"][0]["file"+i]}`} onInput={inputHandler}/></div><hr/></>)
+						ele2.push(<><div><ImagePicker ft="pdf/image" formcontrol center id={`file${i}`} image={`${user["id_c"][0]["file"+i]}`} onInput={inputHandler}/></div><hr/></>)
 					}
 				}
 			}
@@ -649,29 +649,29 @@ const Doc=(props)=>{
 				<hr/>
 				<div className="form-control">
 					<p><strong>Your selfie</strong></p>
-					<ImagePicker center id="file1" formcontrol image={`${route}${user['file1']}`} onInput={inputHandler}/>
+					<ImagePicker center id="file1" formcontrol image={`${user['file1']}`} onInput={inputHandler}/>
 				
 					<p><strong>Your PAN card</strong></p>
 
-					{user["file2"] && user['file2'].split(".").slice(-1)[0]==='pdf' ? <><div className="form-control" style={{overflow:'scroll',height:'30rem'}}><PdfView id="file2" update inputhandler={inputHandler} url={`${route}${user["file2"]}`}/></div></> : 
+					{user["file2"] && user['file2'].split(".").slice(-1)[0]==='pdf' ? <><div className="form-control" style={{overflow:'scroll',height:'30rem'}}><PdfView id="file2" update inputhandler={inputHandler} url={`${user["file2"]}`}/></div></> : 
 
-					<ImagePicker center id="file2" ft="pdf/image" formcontrol image={`${route}${user["file2"]}`} onInput={inputHandler}/>}<br/>
+					<ImagePicker center id="file2" ft="pdf/image" formcontrol image={`${user["file2"]}`} onInput={inputHandler}/>}<br/>
 
 
 				
 					<p><strong>Front side of your AADHAR card</strong></p>
 
-					{user["file3"] && user['file3'].split(".").slice(-1)[0]==='pdf' ? <><div className="form-control" style={{overflow:'scroll',height:'30rem'}}><PdfView id="file3" update inputhandler={inputHandler} url={`${route}${user["file3"]}`}/></div></> : 
+					{user["file3"] && user['file3'].split(".").slice(-1)[0]==='pdf' ? <><div className="form-control" style={{overflow:'scroll',height:'30rem'}}><PdfView id="file3" update inputhandler={inputHandler} url={`${user["file3"]}`}/></div></> : 
 
-					<ImagePicker center id="file3" ft="pdf/image" formcontrol image={`${route}${user["file3"]}`} onInput={inputHandler}/>}<br/>
+					<ImagePicker center id="file3" ft="pdf/image" formcontrol image={`${user["file3"]}`} onInput={inputHandler}/>}<br/>
 				
 					
 
 					<p><strong>Back side of your AADHAR card</strong></p>
 
-					{user["file4"] && user['file4'].split(".").slice(-1)[0]==='pdf' ? <><div className="form-control" style={{overflow:'scroll',height:'30rem'}}><PdfView id="file4" update inputhandler={inputHandler} url={`${route}${user["file4"]}`}/></div></> : 
+					{user["file4"] && user['file4'].split(".").slice(-1)[0]==='pdf' ? <><div className="form-control" style={{overflow:'scroll',height:'30rem'}}><PdfView id="file4" update inputhandler={inputHandler} url={`${user["file4"]}`}/></div></> : 
 
-					<ImagePicker center id="file4" ft="pdf/image" formcontrol image={`${route}${user["file4"]}`} onInput={inputHandler}/>}<br/>
+					<ImagePicker center id="file4" ft="pdf/image" formcontrol image={`${user["file4"]}`} onInput={inputHandler}/>}<br/>
 				
 				</div>
 
