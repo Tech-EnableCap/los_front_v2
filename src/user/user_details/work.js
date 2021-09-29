@@ -17,7 +17,7 @@ import {AuthContext} from '../../shared/context/auth_context';
 import PanAuth from '../../thirdPartyApiLib/panVer';
 
 const Work=(props)=>{
-	let res,component;
+	let res,component,element;
 	const [err,setErr]=useState(false);
 	const [user,setUser]=useState(null);
 	const [loader,setLoader]=useState(false);
@@ -32,10 +32,6 @@ const Work=(props)=>{
 	const [verifypan,setVerifyPan]=useState(false);
 	const [formState,formInputHandler,setFormData]=useForm(
 		{
-			no_emi:{
-				value:'',
-				isValid:false
-			},
 			pan:{
 				value:'',
 				isValid:false
@@ -79,6 +75,13 @@ const Work=(props)=>{
 		},false
 	);
 
+	const [formState1,formInputHandler1,setFormData1]=useForm({
+		no_emi:{
+			value:'',
+			isValid:false
+		},
+	},false);
+
 	const setSalHandler=(event)=>{
 		setSalaried(event.target.value);
 	};
@@ -115,19 +118,21 @@ const Work=(props)=>{
 				);
 				setDob(res[0].dob);
 				if(parseInt(res[0].flag)>3){
-
-					console.log(res);
-
+				
 					setUser(res[0]);
 					setSalaried(res[0].emp_type);
-					setActiveloan(res[0].active_loan_st);
+					setActiveloan(res[0].active_loan_st.toString());
 
-					setFormData({
-						...formState.inputs,
+					setFormData1({
+						...formState1.inputs,
 						no_emi:{
 							value:res[0].tot_cur_emi,
 							isValid:true
 						},
+					},true);
+
+					setFormData({
+						...formState.inputs,
 						pan:{
 							value:res[0].data.pan_num,
 							isValid:true
@@ -156,10 +161,6 @@ const Work=(props)=>{
 							value:res[0].acc_num,
 							isValid:true
 						},
-						ifsc_num:{
-							value:'',
-							isValid:false,
-						},
 						sal:{
 							value:res[0].monthly_sal,
 							isValid:true
@@ -178,6 +179,7 @@ const Work=(props)=>{
 						}
 
 					},true);
+
 				}
 			
 			}catch(err){
@@ -220,7 +222,7 @@ const Work=(props)=>{
 			id:auth.userId,
 			emp_type:salaried,
 			active_loan_st:activeloan,
-			tot_cur_emi:formState.inputs.no_emi.value,
+			tot_cur_emi:element ? formState.inputs.no_emi.value : '_',
 			pan_num:formState.inputs.pan.value,
 			comp_name:formState.inputs.comp.value,
 			comp_add:formState.inputs.address.value,
@@ -256,6 +258,36 @@ const Work=(props)=>{
 		}
 	}
 
+	if(activeloan==="true"){
+		if(user){
+			element=(
+				<Input element="input" type="number" label="Total Current EMIs" 
+				validators={[VALIDATOR_NUMBER(),VALIDATOR_POSITIVE()]}
+				id="no_emi"
+				placeholder="0"
+				errorText="Please enter a Valid positive Number"
+				onInput={formInputHandler}
+				initvalue={user.tot_cur_emi}
+				initvalid={true} />
+			)
+		}else{
+			element=(
+				<Input element="input" type="number" label="Total Current EMIs" 
+				validators={[VALIDATOR_NUMBER(),VALIDATOR_POSITIVE()]}
+				id="no_emi"
+				placeholder="0"
+				errorText="Please enter a Valid positive Number"
+				onInput={formInputHandler1}
+				initvalue={formState1.inputs.no_emi.value}
+				initvalid={formState1.inputs.no_emi.isValid} />
+			)
+		}
+	}else{
+		element=null;
+	}
+
+	console.log(formState1);
+
 
 	if(next){
 		if(props.mode==='req'){
@@ -288,18 +320,11 @@ const Work=(props)=>{
 
 		      	<div className="form-control" onChange={setLoanHandler}>
 					<label>Do you have an active loan ?</label>
-		        	<input type="radio" value="true" checked={activeloan} defaultChecked name="loan"/>Yes
-		        	<input type="radio" value="false" checked={!activeloan} name="loan"/>No
+		        	<input type="radio" value="true" checked={activeloan==="true"} defaultChecked name="loan"/>Yes
+		        	<input type="radio" value="false" checked={activeloan==="false"} name="loan"/>No
 		      	</div>
 
-		      	<Input element="input" type="number" label="Total Current EMIs" 
-					validators={[VALIDATOR_NUMBER(),VALIDATOR_POSITIVE()]}
-					id="no_emi"
-					placeholder="0"
-					errorText="Please enter a Valid positive Number"
-					onInput={formInputHandler}
-					initvalue={user.tot_cur_emi}
-					initvalid={true} />
+		      	{element}
 
 				<Input element="input" type="text" label="Please enter PAN card number" 
 					validators={[VALIDATOR_REQUIRE(),VALIDATOR_PAN()]}
@@ -397,7 +422,7 @@ const Work=(props)=>{
 					initvalid={true} />
 
 					<Button onClick={backHandle}>Back</Button>
-					<Button type="button" disabled={!formState.isValid} onClick={saveHandle}>Update</Button>
+					<Button type="button" disabled={!formState.isValid || (element ? !formState1.isValid : false)} onClick={saveHandle}>Update</Button>
 					<Button type="button" onClick={goToNext}>Next</Button>
 
 					</form>
@@ -424,18 +449,11 @@ const Work=(props)=>{
 
 		      	<div className="form-control" onChange={setLoanHandler}>
 					<label>Do you have an active loan ?</label>
-		        	<input type="radio" value="Yes" checked={activeloan==="Yes"} name="loan"/>Yes
-		        	<input type="radio" value="No" checked={activeloan==="No"} name="loan"/>No
+		        	<input type="radio" value="true" checked={activeloan==="true"} name="loan"/>Yes
+		        	<input type="radio" value="false" checked={activeloan==="false"} name="loan"/>No
 		      	</div>
 
-		      	<Input element="input" type="number" label="Total Current EMIs" 
-					validators={[VALIDATOR_NUMBER(),VALIDATOR_POSITIVE()]}
-					id="no_emi"
-					placeholder="0"
-					errorText="Please enter a Valid positive Number"
-					onInput={formInputHandler}
-					initvalue={formState.inputs.no_emi.value}
-					initvalid={formState.inputs.no_emi.isValid} />
+		      	{element}
 
 				<Input element="input" type="text" label="Please enter PAN card number" 
 					validators={[VALIDATOR_REQUIRE(),VALIDATOR_PAN()]}
@@ -529,7 +547,7 @@ const Work=(props)=>{
 					initvalid={formState.inputs.cur_job.isValid} />
 
 					<Button onClick={backHandle}>Back</Button>
-					<Button type="form" disabled={!formState.isValid}>Next</Button>
+					<Button type="form" disabled={!formState.isValid || (element ? !formState1.isValid : false)}>Next</Button>
 
 					</form>
 			</Card></div>

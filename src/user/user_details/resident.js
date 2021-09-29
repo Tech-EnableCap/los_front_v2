@@ -202,9 +202,9 @@ const Resident=(props)=>{
 			cur_state:formState.inputs.state.value,
 			cur_postal:formState.inputs.postal.value,
 			cur_res:resi,
-			rented_by:rent,
-			owned_by:own,
-			monthly_rent:rent_block ? formState2.inputs.month_rent.value : "_",
+			rented_by:resi==="Rented" ? (rent==="_" ? "Family" : rent) : "_",
+			owned_by:resi==="Rented" ? "_" : (own==="_" ? "Self" : own),
+			monthly_rent:resi==="Rented" ? formState2.inputs.month_rent.value : "_",
 			per_res_add:formState1.inputs.address1.value,
 			per_city:formState1.inputs.city1.value,
 			per_state:formState1.inputs.state1.value,
@@ -242,17 +242,38 @@ const Resident=(props)=>{
 	if(resi==="Rented"){
 		if(user){
 			rent_block=(
+				<><div className="form-control" onChange={setRentHandler}>
+					<label>Rented By</label>
+		        	<input type="radio" value="Family" checked={rent==="Family" || rent==="_"} defaultChecked name="rent"/>Family
+		        	<input type="radio" value="Friends" checked={rent==="Friends"} name="rent"/>Friends
+		        	<input type="radio" value="Company Provided" checked={rent==="Company Provided"} name="rent"/>Company Provided
+		        	<input type="radio" value="Self, Staying Alone" checked={rent==="Self, Staying Alone"} name="rent"/>Self, Staying Alone
+		        	<input type="radio" value="Paying Guest" checked={rent==="Paying Guest"} name="rent"/>Paying Guest
+		        	<input type="radio" value="Hostel" checked={rent==="Hostel"} name="rent"/>Hostel
+		      	</div>
+
 				<Input element="input" type="number" label="Monthly Rent" 
 				validators={[VALIDATOR_REQUIRE(),VALIDATOR_NUMBER(),VALIDATOR_POSITIVE()]}
 				id="month_rent"
 				placeholder="monthly rent"
 				errorText="Monthly Rent should be a Valid positive Number"
 				onInput={formInputHandler2}
-				initvalue={user.monthly_rent}
-				initvalid={true} />
+				initvalue={user.monthly_rent==="_" ? formState2.inputs.month_rent.value : user.monthly_rent}
+				initvalid={user.monthly_rent==="_" ? !formState2.inputs.month_rent.isValid : true} /></>
 			);
 		}else{
 			rent_block=(
+
+		      	<><div className="form-control" onChange={setRentHandler}>
+					<label>Rented By</label>
+		        	<input type="radio" value="Family" defaultChecked name="rent"/>Family
+		        	<input type="radio" value="Friends" name="rent"/>Friends
+		        	<input type="radio" value="Company Provided" name="rent"/>Company Provided
+		        	<input type="radio" value="Self, Staying Alone" name="rent"/>Self, Staying Alone
+		        	<input type="radio" value="Paying Guest" name="rent"/>Paying Guest
+		        	<input type="radio" value="Hostel" name="rent"/>Hostel
+		      	</div>
+
 				<Input element="input" type="number" label="Monthly Rent" 
 				validators={[VALIDATOR_REQUIRE(),VALIDATOR_NUMBER(),VALIDATOR_POSITIVE()]}
 				id="month_rent"
@@ -260,11 +281,31 @@ const Resident=(props)=>{
 				errorText="Monthly Rent should be a Valid positive Number"
 				onInput={formInputHandler2}
 				initvalue={formState2.inputs.month_rent.value}
-				initvalid={formState2.inputs.month_rent.isValid} />
+				initvalid={formState2.inputs.month_rent.isValid} /></>
 			);
 		}
 	}else{
-		rent_block=null;
+		if(user){
+			rent_block=(
+				<div className="form-control" onChange={setOwnHandler}>
+					<label>Owned By</label>
+		        	<input type="radio" value="Self" checked={own==="Self" || own==="_"} defaultChecked name="own"/>Self
+		        	<input type="radio" value="Spouse" checked={own==="Spouse"} name="own"/>Spouse
+		        	<input type="radio" value="Parents" checked={own==="Parents"} name="own"/>Parents
+		        	<input type="radio" value="Siblings" checked={own==="Siblings"} name="own"/>Siblings
+		      	</div>
+			);
+		}else{
+			rent_block=(
+				<div className="form-control" onChange={setOwnHandler}>
+					<label>Owned By</label>
+		        	<input type="radio" value="Self" defaultChecked name="own"/>Self
+		        	<input type="radio" value="Spouse" name="own"/>Spouse
+		        	<input type="radio" value="Parents" name="own"/>Parents
+		        	<input type="radio" value="Siblings" name="own"/>Siblings
+		      	</div>
+			);
+		}
 	}
 
 	if(next){
@@ -330,24 +371,7 @@ const Resident=(props)=>{
 			        	<input type="radio" value="Rented" checked={resi==="Rented"} name="res"/>Rented
 			      	</div>
 
-			      	<div className="form-control" onChange={setRentHandler}>
-						<label>Rented By</label>
-			        	<input type="radio" value="Family" checked={rent==="Family"} defaultChecked name="rent"/>Family
-			        	<input type="radio" value="Friends" checked={rent==="Friends"} name="rent"/>Friends
-			        	<input type="radio" value="Company Provided" checked={rent==="Company Provided"} name="rent"/>Company Provided
-			        	<input type="radio" value="Self, Staying Alone" checked={rent==="Self, Staying Alone"} name="rent"/>Self, Staying Alone
-			        	<input type="radio" value="Paying Guest" checked={rent==="Paying Guest"} name="rent"/>Paying Guest
-			        	<input type="radio" value="Hostel" checked={rent==="Hostel"} name="rent"/>Hostel
-			      	</div>
-
-			      	<div className="form-control" onChange={setOwnHandler}>
-						<label>Owned By</label>
-			        	<input type="radio" value="Self" checked={own==="Self"} defaultChecked name="own"/>Owned
-			        	<input type="radio" value="Spouse" checked={own==="Spouse"} name="own"/>Spouse
-			        	<input type="radio" value="Parents" checked={own==="Parents"} name="own"/>Parents
-			        	<input type="radio" value="Siblings" checked={own==="Siblings"} name="own"/>Siblings
-			      	</div>
-
+			      	
 			      	{rent_block}
 
 					<div>
@@ -448,7 +472,7 @@ const Resident=(props)=>{
 					}
 
 					<Button onClick={backHandle}>Back</Button>
-					<Button type="submit" disabled={!formState.isValid || !formState1.isValid || (rent_block ? !formState2.isValid : false)}>Update</Button>
+					<Button type="submit" disabled={!formState.isValid || !formState1.isValid || (resi==="Rented" ? !formState2.isValid : false)}>Update</Button>
 					<Button type="button" onClick={goToNext}>Next</Button>
 
 				</form>
@@ -505,23 +529,6 @@ const Resident=(props)=>{
 			        	<input type="radio" value="Rented" name="res"/>Rented
 			      	</div>
 
-			      	<div className="form-control" onChange={setRentHandler}>
-						<label>Rented By</label>
-			        	<input type="radio" value="Family" defaultChecked name="rent"/>Family
-			        	<input type="radio" value="Friends" name="rent"/>Friends
-			        	<input type="radio" value="Company Provided" name="rent"/>Company Provided
-			        	<input type="radio" value="Self, Staying Alone" name="rent"/>Self, Staying Alone
-			        	<input type="radio" value="Paying Guest" name="rent"/>Paying Guest
-			        	<input type="radio" value="Hostel" name="rent"/>Hostel
-			      	</div>
-
-			      	<div className="form-control" onChange={setOwnHandler}>
-						<label>Owned By</label>
-			        	<input type="radio" value="Self" defaultChecked name="own"/>Owned
-			        	<input type="radio" value="Spouse" name="own"/>Spouse
-			        	<input type="radio" value="Parents" name="own"/>Parents
-			        	<input type="radio" value="Siblings" name="own"/>Siblings
-			      	</div>
 
 			      	{rent_block}
 
@@ -613,7 +620,7 @@ const Resident=(props)=>{
 					}
 
 					<Button onClick={backHandle}>Back</Button>
-					<Button type="submit" disabled={!formState.isValid || !formState1.isValid || (rent_block ? !formState2.isValid : false)}>Next</Button>
+					<Button type="submit" disabled={!formState.isValid || !formState1.isValid || (resi==="Rented" ? !formState2.isValid : false)}>Next</Button>
 
 				</form>
 				</Card></div>

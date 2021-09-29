@@ -625,9 +625,9 @@ const Personal=(props)=>{
 		for (let i=25;i<=44;i++){
 			if(props.user["file"+i]){
 				if(props.user["file"+i].split(".").slice(-1)[0]==='pdf'){
-					ele1.push(<><div key={i} style={{overflow:"hidden"}}><PdfView id={`file${i}`} url={`${route}${props.user["file"+i]}`}/></div><hr/></>)
+					ele1.push(<><div key={i} style={{overflow:"hidden"}}><PdfView id={`file${i}`} url={`${props.user["file"+i]}`}/></div><hr/></>)
 				}else{
-					ele1.push(<><div key={i}><ImagePicker ft="pdf/image" center id={`file${i}`} view={true} image={`${route}${props.user["file"+i]}`}/></div><hr/></>)
+					ele1.push(<><div key={i}><ImagePicker ft="pdf/image" center id={`file${i}`} view={true} image={`${props.user["file"+i]}`}/></div><hr/></>)
 				}
 			}
 		}
@@ -635,9 +635,9 @@ const Personal=(props)=>{
 		for (let i=5;i<=24;i++){
 			if(props.user["file"+i]){
 				if(props.user["file"+i].split(".").slice(-1)[0]==='pdf'){
-					ele1.push(<><div key={i} style={{overflow:"scroll",zIndex:'0'}}><PdfView id={`file${i}`} url={`${route}${props.user["file"+i]}`}/></div><hr/></>)
+					ele1.push(<><div key={i} style={{overflow:"scroll",zIndex:'0'}}><PdfView id={`file${i}`} url={`${props.user["file"+i]}`}/></div><hr/></>)
 				}else{
-					ele1.push(<><div key={i}><ImagePicker ft="pdf/image" center id={`file${i}`} view={true} image={`${route}${props.user["file"+i]}`}/></div><hr/></>)
+					ele1.push(<><div key={i}><ImagePicker ft="pdf/image" center id={`file${i}`} view={true} image={`${props.user["file"+i]}`}/></div><hr/></>)
 				}
 			}
 		}
@@ -773,19 +773,19 @@ const Personal=(props)=>{
 					<h3><center>Personal Documents</center></h3>
 					<br/>
 					<h6 style={{padding:'1rem',fontWeight:'700',color:'rgb(88 88 88)'}}>Selfie</h6>
-					<center><ImagePicker center id="file1" formcontrol image={`${route}${props.user.applicant_id['file1']}`} view={true}/></center>
+					<center><ImagePicker center id="file1" formcontrol image={`${props.user.applicant_id['file1']}`} view={true}/></center>
 					<h6 style={{padding:'1rem',fontWeight:'700',color:'rgb(88 88 88)'}}>PAN</h6>
 					{props.user.applicant_id['file2'].split(".").slice(-1)[0]==='pdf' ? <><center><div style={{overflow:"scroll",zIndex:'0'}}><PdfView id="file2" url={`${route}${props.user.applicant_id["file2"]}`}/></div></center></> : 
 
-					<ImagePicker center id="file2" ft="pdf/image" formcontrol image={`${route}${props.user.applicant_id["file2"]}`} view={true}/>}
+					<ImagePicker center id="file2" ft="pdf/image" formcontrol image={`${props.user.applicant_id["file2"]}`} view={true}/>}
 					<h6 style={{padding:'1rem',fontWeight:'700',color:'rgb(88 88 88)'}}>AADHAR Card front side</h6>
 					{props.user.applicant_id['file3'].split(".").slice(-1)[0]==='pdf' ? <><center><div style={{overflow:"scroll",zIndex:'0'}}><PdfView id="file3" url={`${route}${props.user.applicant_id["file3"]}`}/></div></center></> : 
 
-					<ImagePicker center id="fil3" ft="pdf/image" formcontrol image={`${route}${props.user.applicant_id["file3"]}`} view={true}/>}
+					<ImagePicker center id="fil3" ft="pdf/image" formcontrol image={`${props.user.applicant_id["file3"]}`} view={true}/>}
 					<h6 style={{padding:'1rem',fontWeight:'700',color:'rgb(88 88 88)'}}>AADHAR Card back side</h6>
 					{props.user.applicant_id['file4'].split(".").slice(-1)[0]==='pdf' ? <><center><div style={{overflow:"scroll",zIndex:'0'}}><PdfView id="file4" url={`${route}${props.user.applicant_id["file4"]}`}/></div></center></> : 
 
-					<ImagePicker center id="file4" ft="pdf/image" formcontrol image={`${route}${props.user.applicant_id["file4"]}`} view={true}/>}
+					<ImagePicker center id="file4" ft="pdf/image" formcontrol image={`${props.user.applicant_id["file4"]}`} view={true}/>}
 				</div>
 		</div>
 		<div className="details" style={{marginBottom:'2rem'}} ref={bankRef}>

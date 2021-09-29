@@ -1,1 +1,1 @@
-export const route = "http://127.0.0.1:8000";
+export const route = "http://13.235.134.207:8000";

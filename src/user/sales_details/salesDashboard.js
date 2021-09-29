@@ -59,6 +59,7 @@ const SalesDashboard=(props)=>{
 					Authorization: "Bearer "+auth.token
 				}
 			);
+			console.log("---------------------------");
 			console.log(res);
 			if(count==="true"){
 				let total=res.slice(-1)[0];
@@ -305,6 +306,7 @@ const SalesDashboard=(props)=>{
 						  </tr>
 						  </thead>
 						  {search.length>0 ? search.map((usr)=>{
+						  	console.log(usr);
 						  	return(
 						  		<tbody><tr className="border_bottom" key={usr.id_n[0].id}>
 						  			<td><input type="checkbox" style={{margin:"10px"}} onChange={(event)=>handleChange(event,usr)}/></td>

@@ -28,7 +28,7 @@ class EmailVer extends Url {
                     headers : header
                 })
                 .then(res => {
-                    //console.log(res);
+                    console.log(res);
                     this.rqID = res['data']['requestId'];
                     resolve(this.rqID);
                     //console.log(this.rqID);

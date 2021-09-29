@@ -118,7 +118,7 @@ const Authenticate=()=>{
 		setErr(false);
 	}
 
-	const comeOtpHandleEmail=()=>{
+	/*const comeOtpHandleEmail=()=>{
 		setLoad(true);
 		EmailAuth.sendOTP(formState.inputs.email.value).then((res)=>{
 			console.log(res);
@@ -135,6 +135,37 @@ const Authenticate=()=>{
 			setLoad(false);
 		})
 		
+	}*/
+
+	const comeOtpHandleEmail=async ()=>{
+		setLoad(true);
+		try{
+			let body = {
+	            "email": formState.inputs.email.value,
+	            "notification": {
+	              "emails": [
+	                ""
+	              ],
+	              "webhook": true,
+	              "webhookConfig": {
+	                "url": "https://enablecap.in"
+	              }
+	            }
+	          }
+	        let header = {
+	            "Content-Type" : "application/json",
+	        }
+			res=await sendReq(route+"/api/accounts/email_var",
+				'POST',
+				JSON.stringify(body),
+				header
+			);
+			setLoad(false);
+			console.log(res);
+		}catch(err){
+			console.log(err);
+			setLoad(false);
+		}
 	}
 
 

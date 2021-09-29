@@ -118,7 +118,7 @@ export const validate=(value,validators)=>{
       isValid=isValid && /^[0-9]+$/.test(value);
     }
     if(validator.type===VALIDATOR_TYPE_POSITIVE){
-      isValid=isValid && value>=0;
+      isValid=isValid && value>0;
     }
     if(validator.type===VALIDATOR_TYPE_PAN){
       isValid=isValid && /^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$/.test(value);
